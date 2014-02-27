@@ -1,52 +1,34 @@
 <meta charset="utf8">
 <?php
-  function getSource($url){
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_HEADER, 0);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-  }
-
-  function replace_unicode_escape_sequence($match) {
-    return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
-  }
+  require("GTranslate.php");
+  error_reporting(E_ALL);
+  ini_set('display_error', 1);
 
   if(isset($_POST['submit'])) {
     $contents = file_get_contents($_FILES["source"]["tmp_name"]);
-    $contents = preg_replace('/<!--.+?-->/s', '', $contents);
-    $contents = str_replace(array('\n','\r\n',PHP_EOL),array('','',''), $contents);
-    $contents = urlencode($contents);
-    $contents = str_split($contents, 100);
-    $from = $_POST['from'];
-    $to = $_POST['to'];
+    $contents = str_split($contents, 800);
+    $source = $_POST['source'];
+    $target = $_POST['target'];
 
-    /*
-    $doc = new DOMDocument();
-    $doc->loadHTMLFile('test.html');
-    $divs = $doc->getElementsByTagName('div');
-    foreach($divs as $n) {
-        echo $n->nodeValue;
+    try {
+      $apikey = 'AIzaSyClJOuVy061SG6Mwvc7mSmqBJtbkab8Tlo';
+      $gt = new Gtranslate();
+      $gt->setApiKey($apikey);
+      //$gt->setRequestType('curl');
+
+      $translated = "";
+      $nextround_append = "";
+      foreach ($contents as $value) {
+        $value = $nextround_append.$value;
+        for($i=strlen($value)-1; $i >0 && $value[$i] != "<" ; $i--);
+        $nextround_append = substr($value, $i);
+        $value = substr($value, 0, $i);
+        $translated .= $gt->{$source."_to_".$target}($value);
+      }
     }
-    */
-
-    foreach ($contents as $value) {
-      $url = "http://translate.google.com/translate_a/t?";
-      $url .= "client=t&q=$value&hl=$to&sl=$from&tl=$to";
-      $url .= "&ie=UTF-8&oe=UTF-8&multires=1&otf=1&pc=1&trs=1&ssel=3&tsel=6&sc=1";
-
-      $translated = getSource($url);
-      preg_match('/\[{3}"(.+?)",/', $translated, $translated);
-      $translated = str_replace("\\\"", "\"", rtrim($translated[1], "."));
-
-      $whole_word .= $translated;
-    }
-
-    $translated = preg_replace_callback('/\\\\u([0-9a-f]{4})/i', 'replace_unicode_escape_sequence', $whole_word);
+    catch (GTranslateException $ge) { echo $ge->getMessage(); }
   }
 ?>
-
 <html>
   <head>
     <style>
@@ -73,18 +55,18 @@
     <div class="wrapper">
       <div class="container">
         <form action="#" method="post" enctype="multipart/form-data">
-          <input type="file" name="source" required>
+          <input type="file" name="source" required/>
           <p>
-            <select name="from">
-              <option value="th">ไทย</option>
-              <option value="en">อังกฤษ</option>
-              <option value="vi">เวียดนาม</option>
+            <select name="source">
+              <option value="thai">ไทย</option>
+              <option value="english">อังกฤษ</option>
+              <option value="vietnamse">เวียดนาม</option>
             </select>
             To
-            <select name="to">
-              <option value="th">ไทย</option>
-              <option value="en">อังกฤษ</option>
-              <option value="vi">เวียดนาม</option>
+            <select name="target">
+              <option value="thai">ไทย</option>
+              <option value="english">อังกฤษ</option>
+              <option value="vietnamse">เวียดนาม</option>
             </select>
           </p>
           <input type="submit" name="submit" value="Translate">
