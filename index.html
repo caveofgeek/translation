@@ -1,0 +1,53 @@
+<meta charset="utf8">
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/stylesheet.css" rel="stylesheet" media="screen">
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <form enctype="multipart/form-data" id="file">
+          <fieldset class="inputs">
+            <select id="source" name="source">
+              <option value="thai">ไทย</option>
+              <option value="english">อังกฤษ</option>
+              <option value="vietnamese">เวียดนาม</option>
+            </select>
+            <a href="#" id="swap" class="btn"><i class="icon-retweet"></i></a>
+            <select id="target" name="target">
+              <option value="thai">ไทย</option>
+              <option value="english" selected>อังกฤษ</option>
+              <option value="vietnamese">เวียดนาม</option>
+            </select>
+          </fieldset>
+          <fieldset class="actions">
+            <span class="btn upload-button pull-left">
+              <i class="icon-folder-open"></i> <span class="hidden-phone">Choose file</span>
+              <input type="file" name="source_file" id="source_file" required/>
+            </span>
+            <div class="sourcefile-dialog pull-left">
+              <p id="sourcefile" class="file-name"><i>Please select file</i></p>
+            </div>
+            <input type="button" class="btn btn-success pull-right" id="submit" name="submit" value="Translate">
+          </fieldset>
+        </form>
+        <div class="progress progress-success progress-striped active">
+          <div class="bar" style="width: 100%"><p>Translating...</p></div>
+        </div>
+        <div class="download-dialog">
+          <form action="file_generator.php" method="post" id="download" class="pull-left">
+            <input type="text" id="download-name" name="filename" value="filename.html"><i></i>
+            <input type="hidden" id="download-content" name="content">
+          </form>
+          <a href="#" id="download" data-toggle="tooltip" title="download" class="pull-right"><i class="icon-download-alt icon-white"></i></a>
+        </div>
+      </div>
+    </div>
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>
