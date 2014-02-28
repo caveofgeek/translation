@@ -1,103 +1,92 @@
+body {
+    background-color: #2980b9;
+}
+
 div.container {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
 div.wrapper {
-  padding: 30px 100px;
-  text-align: center;
-  margin: 0 auto;
-  background-color: #34495e;
+    padding: 30px 100px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: #34495e;
 }
 
-form#file {
-  margin: 0 auto;
-  width: 408px;
-}
-
-form#download {
-  width: 380px;
+form {
+    margin: 0 auto;
+    width: 410px;
 }
 
 fieldset {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
-textarea {
-  width: 90%;
-  margin: 0 auto;
-}
-
-select {
-  width: 180px;
-  margin: 0;
+select.form-control {
+    width: 181px !important;
+    margin: 0;
 }
 
 a#swap {
-  height: 20px;
+    height: 30px;
+}
+
+a#swap i {
+    transform:rotate(90deg);
+    -ms-transform:rotate(90deg); /* IE 9 */
+    -webkit-transform:rotate(90deg); /* Opera, Chrome, and Safari */
 }
 
 span.upload-button {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
 }
 
 span.upload-button input {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  right: 0;
-  -moz-transform: translate(100%, 0px);
-  cursor: pointer;
-  font-size: 25px; /* For IE. */
-  padding: 100px;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    -moz-transform: translate(100%, 0px);
+    cursor: pointer;
+    font-size: 25px; /* For IE. */
+    padding: 100px;
 }
 
 div.sourcefile-dialog {
-  border: 1px solid #ecf0f1;
-  width: 195px;
-  height: 20px;
-  margin-left: 5px;
-  border-radius: 4px;
-  padding: 4px 0;
-  text-align: left;
-}
-
-div.download-dialog {
-  border: 1px solid #ecf0f1;
-  width: 400px;
-  height: 20px;
-  margin: 11px auto;
-  border-radius: 4px;
-  padding: 10px 5px;
-  text-align: left;
-  display: none;
+    border: 1px solid #ecf0f1;
+    width: 200px;
+    height: 34px;
+    margin: 0 5px;
+    border-radius: 4px;
+    padding: 5px 5px;
+    text-align: left;
 }
 
 p.file-name {
-  margin: 0;
-  color: white;
-  margin-left: 3px;
-}
-
-p.file-name a {
-  margin-right: 3px;
+    margin: 0;
+    color: white;
+    margin-left: 3px;
 }
 
 div.progress {
-  width: 410px;
-  margin: 20px auto;
-  height: 35px;
-  display: none;
+    width: 410px;
+    margin: 20px auto;
+    height: 35px;
+    display: none;
+}
+
+form#download {
+    display: none;
 }
 
 div.progress p {
-  margin: 0;
-  padding: 8px 0;
+    margin: 0;
+    padding: 8px 0;
 }
 
-input#download-name {
-  margin: 0;
-  margin-right: 5px;
-  width: 100%;
+button#download {
+    font-size: 20px;
 }
+

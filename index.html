@@ -1,31 +1,35 @@
 <meta charset="utf8">
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>HTML Translator</title>
+
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/stylesheet.css" rel="stylesheet" media="screen">
   </head>
   <body>
     <div class="container">
       <div class="wrapper">
-        <form enctype="multipart/form-data" id="file">
+        <form enctype="multipart/form-data" id="file" class="form-inline">
           <fieldset class="inputs">
-            <select id="source" name="source">
+            <select id="source" name="source" class="form-control input-sm">
               <option value="thai">ไทย</option>
               <option value="english">อังกฤษ</option>
               <option value="vietnamese">เวียดนาม</option>
             </select>
-            <a href="#" id="swap" class="btn"><i class="icon-retweet"></i></a>
-            <select id="target" name="target">
+            <a href="#" id="swap" class="btn btn-default"><i class="glyphicon glyphicon-sort"></i></a>
+            <select id="target" name="target" class="form-control input-sm">
               <option value="thai">ไทย</option>
               <option value="english" selected>อังกฤษ</option>
               <option value="vietnamese">เวียดนาม</option>
             </select>
           </fieldset>
           <fieldset class="actions">
-            <span class="btn upload-button pull-left">
-              <i class="icon-folder-open"></i> <span class="hidden-phone">Choose file</span>
+            <span class="btn btn-default upload-button pull-left">
+              <i class="glyphicon glyphicon-cloud-upload"></i> <span class="hidden-phone">Choose file</span>
               <input type="file" name="source_file" id="source_file" required/>
             </span>
             <div class="sourcefile-dialog pull-left">
@@ -34,16 +38,26 @@
             <input type="button" class="btn btn-success pull-right" id="submit" name="submit" value="Translate">
           </fieldset>
         </form>
-        <div class="progress progress-success progress-striped active">
-          <div class="bar" style="width: 100%"><p>Translating...</p></div>
+
+        <div class="progress progress-striped active">
+          <div class="progress-bar progress-bar-success" role="progressbar" style="width: 100%">
+            <p>Translating...</p>
+          </div>
         </div>
-        <div class="download-dialog">
-          <form action="file_generator.php" method="post" id="download" class="pull-left">
-            <input type="text" id="download-name" name="filename" value="filename.html"><i></i>
-            <input type="hidden" id="download-content" name="content">
-          </form>
-          <a href="#" id="download" data-toggle="tooltip" title="download" class="pull-right"><i class="icon-download-alt icon-white"></i></a>
-        </div>
+
+        <form action="file_generator.php" method="post" id="download">
+          <fieldset>
+            <div class="input-group">
+              <input type="text" class="form-control" id="download-name" name="filename">
+              <input type="hidden" id="download-content" name="content">
+              <span class="input-group-btn">
+                <button id="download" class="btn btn-default" type="button">
+                  <i class="glyphicon glyphicon-cloud-download"></i>
+                </button>
+              </span>
+            </div>
+          </fieldset>
+        </form>
       </div>
     </div>
     <script src="http://code.jquery.com/jquery.js"></script>

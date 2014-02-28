@@ -42,16 +42,14 @@ $( document ).ready(function() {
     });
   });
 
-  $('a#download').click(function(){
-    event.stopPropagation();
-    event.preventDefault();
+  $('button#download').click(function(){
     $("form#download").submit();
   });
 
   function showProgessBar(e) {
     $("form#file").css("border-bottom", "1px solid #eee");
     $("div.progress").fadeIn();
-    $("div.download-dialog").hide();
+    $("form#download").hide();
   }
 
   function computeTranslate(data){
@@ -59,6 +57,6 @@ $( document ).ready(function() {
     var name = $("select#target").val()+"_"+filename;
     $("input#download-name").val(name);
     $("input#download-content").val(data);
-    $("div.download-dialog").fadeIn();
+    $("form#download").fadeIn();
   }
 });
